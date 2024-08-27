@@ -5,5 +5,4 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
 	plugins: [react(), svgr(), tsconfigPaths()],
-	base: '/exonn-test-task/',
 });

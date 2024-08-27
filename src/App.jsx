@@ -21,79 +21,74 @@ const LagerverwaltungPage = lazy(() => import('./pages/LagerverwaltungPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 // import NotFoundPage from './pages/NotFoundPage'
 
-const router = createBrowserRouter(
-	[
-		{
-			path: '/',
-			element: <Layout />,
-			children: [
-				{
-					index: true,
-					element: <HomePage />,
-				},
-				{
-					path: 'dashboard',
-					element: <DashboardPage />,
-				},
-				{
-					path: 'accounting',
-					element: <AccountingPage />,
-				},
-				{
-					path: 'administration',
-					element: <AdministrationPage />,
-				},
-				{
-					path: 'auswahllisten',
-					element: <AuswahllistenPage />,
-				},
-				{
-					path: 'banking',
-					element: <BankingPage />,
-				},
-				{
-					path: 'einkauf',
-					element: <EinkaufPage />,
-				},
-				{
-					path: 'help',
-					element: <HelpPage />,
-				},
-				{
-					path: 'post-office',
-					element: <PostOfficePage />,
-				},
-				{
-					path: 'statistik',
-					element: <StatistikPage />,
-				},
-				{
-					path: 'telefonie',
-					element: <TelefoniePage />,
-				},
-				{
-					path: 'verkauf',
-					element: <VerkaufPage />,
-				},
-				{
-					path: 'warenbestand',
-					element: <WarenbestandPage />,
-				},
-				{
-					path: 'lagerverwaltung',
-					element: <LagerverwaltungPage />,
-				},
-				{
-					path: '*',
-					element: <NotFoundPage />,
-				},
-			],
-		},
-	],
+const router = createBrowserRouter([
 	{
-		basename: '/exonn-test-task/',
-	}
-);
+		path: '/',
+		element: <Layout />,
+		children: [
+			{
+				index: true,
+				element: <HomePage />,
+			},
+			{
+				path: 'dashboard',
+				element: <DashboardPage />,
+			},
+			{
+				path: 'accounting',
+				element: <AccountingPage />,
+			},
+			{
+				path: 'administration',
+				element: <AdministrationPage />,
+			},
+			{
+				path: 'auswahllisten',
+				element: <AuswahllistenPage />,
+			},
+			{
+				path: 'banking',
+				element: <BankingPage />,
+			},
+			{
+				path: 'einkauf',
+				element: <EinkaufPage />,
+			},
+			{
+				path: 'help',
+				element: <HelpPage />,
+			},
+			{
+				path: 'post-office',
+				element: <PostOfficePage />,
+			},
+			{
+				path: 'statistik',
+				element: <StatistikPage />,
+			},
+			{
+				path: 'telefonie',
+				element: <TelefoniePage />,
+			},
+			{
+				path: 'verkauf',
+				element: <VerkaufPage />,
+			},
+			{
+				path: 'warenbestand',
+				element: <WarenbestandPage />,
+			},
+			{
+				path: 'lagerverwaltung',
+				element: <LagerverwaltungPage />,
+			},
+			{
+				path: '*',
+				element: <NotFoundPage />,
+			},
+		],
+	},
+]);
 
 function App() {
 	return (
