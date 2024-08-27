@@ -5,8 +5,5 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
 	plugins: [react(), svgr(), tsconfigPaths()],
-	base: '/exonn-test-task/', // замените 'название-репозитория' на имя вашего репозитория на GitHub
-	build: {
-		outDir: 'dist',
-	},
+	base: '/exonn-test-task/',
 });
