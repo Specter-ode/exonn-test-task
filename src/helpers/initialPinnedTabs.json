@@ -1,0 +1,17 @@
+[
+	{
+		"id": "101",
+		"title": "dashboard",
+		"position": 1
+	},
+	{
+		"id": "102",
+		"title": "accounting",
+		"position": 2
+	},
+	{
+		"id": "103",
+		"title": "administration",
+		"position": 3
+	}
+]

@@ -1,0 +1,52 @@
+[
+	{
+		"id": "104",
+		"title": "auswahllisten",
+		"position": 1
+	},
+	{
+		"id": "105",
+		"title": "banking",
+		"position": 2
+	},
+	{
+		"id": "106",
+		"title": "einkauf",
+		"position": 3
+	},
+	{
+		"id": "107",
+		"title": "help",
+		"position": 4
+	},
+	{
+		"id": "108",
+		"title": "post-office",
+		"position": 5
+	},
+	{
+		"id": "109",
+		"title": "statistik",
+		"position": 6
+	},
+	{
+		"id": "110",
+		"title": "telefonie",
+		"position": 7
+	},
+	{
+		"id": "111",
+		"title": "verkauf",
+		"position": 8
+	},
+	{
+		"id": "112",
+		"title": "warenbestand",
+		"position": 9
+	},
+	{
+		"id": "113",
+		"title": "lagerverwaltung",
+		"position": 10
+	}
+]
