@@ -1,10 +1,10 @@
 import s from './DragList.module.css';
 import Tab from 'components/Tab';
 import { Draggable, Droppable } from '@hello-pangea/dnd';
+import { memo } from 'react';
 
-const DragList = ({ items, isPinned, currentDroppableId, isNotScrollable }) => {
+const DragList = ({ items, isPinned, currentDroppableId, isNotScrollable, isPinnedSticky }) => {
 	const droppableId = isPinned ? 'pinned_tabs' : 'common_tabs';
-
 	return (
 		<Droppable
 			droppableId={droppableId}
@@ -36,6 +36,7 @@ const DragList = ({ items, isPinned, currentDroppableId, isNotScrollable }) => {
 												isPinned={isPinned}
 												isDragging={isDragging}
 												currentDroppableId={currentDroppableId}
+												isPinnedSticky={isPinnedSticky}
 											/>
 										</div>
 									);
@@ -50,4 +51,4 @@ const DragList = ({ items, isPinned, currentDroppableId, isNotScrollable }) => {
 	);
 };
 
-export default DragList;
+export default memo(DragList);

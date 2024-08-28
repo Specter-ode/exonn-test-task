@@ -1,9 +1,6 @@
 .box {
-	position: relative;
 	display: flex;
-
 	background-color: var(--hover-bg);
-
 	flex-direction: row;
 	overflow-x: auto;
 	white-space: nowrap;

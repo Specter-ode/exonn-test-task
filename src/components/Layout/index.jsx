@@ -14,13 +14,13 @@ const Layout = () => {
 					</Link>
 				</header>
 				<Navigation />
-				<main className={s.wrapper}>
+				{/* <main className={s.wrapper}>
 					<div className={s.content}>
 						<Suspense>
 							<Outlet />
 						</Suspense>
 					</div>
-				</main>
+				</main> */}
 			</div>
 		</div>
 	);

@@ -154,7 +154,12 @@ const Navigation = () => {
 							isPinnedTabsLeftShadow ? s.pinned_shadow : ''
 						}`}
 					>
-						<DragList items={pinnedTabs} isPinned={true} currentDroppableId={currentDroppableId} />
+						<DragList
+							items={pinnedTabs}
+							isPinned={true}
+							currentDroppableId={currentDroppableId}
+							isPinnedSticky={isPinnedSticky}
+						/>
 					</div>
 				)}
 				{commonTabs?.length > 0 && (
