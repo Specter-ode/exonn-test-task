@@ -2,7 +2,7 @@
 	position: fixed;
 	right: 0;
 	top: 69px;
-	z-index: 0;
+	z-index: 5;
 	box-shadow: -8px 0px 8px -5px rgba(34, 60, 80, 0.2);
 }
 
@@ -15,7 +15,7 @@
 .menu {
 	position: absolute;
 	right: 0;
-	top: 123px;
+	top: 117px;
 	display: flex;
 	flex-direction: column;
 	min-width: 225px;
@@ -25,4 +25,10 @@
 	border: 1px solid rgba(233, 233, 233, 0.7);
 	max-height: calc(100vh - 118px);
 	overflow-y: auto;
+}
+
+@media screen and (min-width: 768px) {
+	.menu {
+		top: 123px;
+	}
 }

@@ -42,7 +42,6 @@ const Tab = ({
 	isPinned,
 	isDragging = false,
 	isOverflowTab = false,
-	currentDroppableId = null,
 	isPinnedSticky = false,
 }) => {
 	const { width: windowWidth } = useWindowDimensions();
@@ -61,8 +60,7 @@ const Tab = ({
 	const IconComponent = iconMap[title];
 	const showTitle = isOverflowTab || !isPinned;
 	const normalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
-	const canShowTooltip = !isOverflowTab && !currentDroppableId;
-	const isTooltip = canShowTooltip && isHovered;
+	const isTooltip = !isOverflowTab && isHovered;
 
 	useEffect(() => {
 		// Создаем временный tooltip для измерения ширины
@@ -108,27 +106,28 @@ const Tab = ({
 		}
 	}, [isTooltip, normalizedTitle, isPinned, isPinnedSticky]);
 	pinnedTabs?.length;
-	const handleAddToPinned = () => {
+	const handleAddToPinned = e => {
 		if (pinnedTabs?.length >= 5) {
 			toast.warning('You cannot pin more than 5 tabs.');
 		} else {
 			dispatch(addToPinned(item));
 		}
 	};
-	const handleRemoveFromPinned = () => {
+	const handleRemoveFromPinned = e => {
 		dispatch(removeFromPinned(item));
 	};
 
+	const isMobile = windowWidth < 768;
 	const handleMouseEnter = () => {
-		if (windowWidth > 767) {
+		if (!isMobile) {
 			hoverTimeoutRef.current = setTimeout(() => {
 				setIsHovered(true);
-			}, 700);
+			}, 300);
 		}
 	};
 
 	const handleMouseLeave = () => {
-		if (isHovered && windowWidth > 767) {
+		if (isHovered && !isMobile) {
 			setIsHovered(false);
 		}
 		hoverTimeoutRef?.current && clearTimeout(hoverTimeoutRef.current);
@@ -144,14 +143,20 @@ const Tab = ({
 	};
 
 	return (
-		<div className={s.wrapper} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+		<div
+			style={{
+				position: !isOverflowTab && isMobile ? 'relative' : 'static',
+			}}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
 			<Link
 				to={to}
 				className={` ${s.link} ${getLinkAdditionalClassName()}`}
 				ref={tabRef}
 				style={{
-					paddingRight: showTitle ? 0 : '20px',
-					position: canShowTooltip ? 'relative' : 'static',
+					paddingRight: showTitle ? 0 : isMobile ? '24px' : '20px',
+					paddingLeft: isMobile ? '24px' : '20px',
 				}}
 			>
 				{IconComponent ? <IconComponent /> : null}
@@ -159,6 +164,16 @@ const Tab = ({
 					<p className={isOverflowTab ? s.title_overflow : s.title}>{normalizedTitle}</p>
 				)}
 			</Link>
+			{!isOverflowTab && isMobile && (
+				<button
+					className={s.mobileBtn}
+					type='button'
+					onClick={isPinned ? handleRemoveFromPinned : handleAddToPinned}
+					aria-label={isPinned ? 'Remove from pinned tabs' : 'Add to pinned tabs'}
+				>
+					{isPinned ? <CancelIcon /> : <PinIcon />}
+				</button>
+			)}
 			{isTooltip && (
 				<>
 					{isPinned ? (
@@ -169,7 +184,7 @@ const Tab = ({
 								className={s.removeBtn}
 								type='button'
 								onClick={handleRemoveFromPinned}
-								aria-label='remove form pinned'
+								aria-label='Remove from pinned tabs'
 							>
 								<CancelIcon />
 							</button>
@@ -180,6 +195,7 @@ const Tab = ({
 							className={s.tooltip}
 							style={tooltipStyle}
 							onClick={handleAddToPinned}
+							aria-label='Add to pinned tabs'
 						>
 							<PinIcon />
 							<p>Tab anpinnen</p>

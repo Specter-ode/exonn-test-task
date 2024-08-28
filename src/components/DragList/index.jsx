@@ -35,7 +35,6 @@ const DragList = ({ items, isPinned, currentDroppableId, isNotScrollable, isPinn
 												item={item}
 												isPinned={isPinned}
 												isDragging={isDragging}
-												currentDroppableId={currentDroppableId}
 												isPinnedSticky={isPinnedSticky}
 											/>
 										</div>

@@ -5,8 +5,8 @@
 	transition: all 0.3s linear;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 10px;
-	padding-left: 20px;
 	background-color: #fefefe;
 }
 
@@ -38,7 +38,7 @@
 
 .link_dragged {
 	color: white;
-	background-color: #7f858d;
+	background-color: var(--main-color);
 }
 
 .link_overflow:hover {
@@ -46,7 +46,7 @@
 }
 
 .title {
-	padding-right: 20px;
+	padding-right: 24px;
 	border-right: 1px solid var(--border-color);
 }
 
@@ -82,6 +82,28 @@
 	transition: color 0.3s linear;
 	color: var(--main-color);
 }
+
 .removeBtn:hover {
 	color: #ee3f3e;
+}
+
+.mobileBtn {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+	padding: 2px;
+	background-color: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	transition: color 0.3s linear;
+	color: var(--main-color);
+}
+
+@media screen and (min-width: 768px) {
+	.title {
+		padding-right: 20px;
+	}
 }

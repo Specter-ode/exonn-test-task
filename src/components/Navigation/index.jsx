@@ -1,5 +1,4 @@
 import s from './Navigation.module.css';
-
 import { useDispatch, useSelector } from 'react-redux';
 import DragList from 'components/DragList';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -7,59 +6,25 @@ import OverflowTabs from 'components/OverflowTabs';
 import { DragDropContext } from '@hello-pangea/dnd';
 import { updateCommonTabs, updatePinnedTabs } from 'redux/tabs/tabs-slice';
 import { reorderTabs } from 'helpers/reorderTabs';
-import useWindowDimensions from 'helpers/useWindowDimensions';
 
 const Navigation = () => {
-	const { width } = useWindowDimensions();
-	const isMobile = width < 768;
 	const { pinnedTabs, commonTabs } = useSelector(state => state.tabs);
 	const [overflowItems, setOverflowItems] = useState([]);
 	const [currentDroppableId, setCurrentDroppableId] = useState(null);
 	const [isPinnedSticky, setIsPinnedSticky] = useState(true);
-	const [canDrag, setCanDrag] = useState(false);
 	const boxRef = useRef(null);
 	const pinnedTabsRef = useRef(null);
-	const dragTimerRef = useRef(null);
 
 	const dispatch = useDispatch();
 
-	const onBeforeCapture = beforeCapture => {
-		console.log('beforeCapture: ', beforeCapture);
-		// Если это мобильное устройство, устанавливаем таймер на 2 секунды
-		if (isMobile) {
-			dragTimerRef.current = setTimeout(() => {
-				setCanDrag(true);
-			}, 2000);
-		} else {
-			// На десктопе разрешаем перетаскивание сразу
-			setCanDrag(true);
-		}
-	};
-
-	const onBeforeDragStart = beforeDragStart => {
-		console.log('beforeDragStart: ', beforeDragStart);
-		// Если таймер еще не истек, отменяем перетаскивание
-		if (!canDrag) {
-			clearTimeout(dragTimerRef.current);
-			setCanDrag(false);
-		}
-	};
-
 	const onDragStart = result => {
-		console.log('onDragStart result: ', result);
-		if (isMobile && !canDrag) {
-			return; // Отменяем перетаскивание
-		}
 		const { source } = result;
 		setCurrentDroppableId(source.droppableId);
 	};
 
 	const onDragEnd = result => {
-		console.log('onDragEnd result: ', result);
 		const { source, destination } = result;
 		setCurrentDroppableId(null);
-		dragTimerRef.current && clearTimeout(dragTimerRef.current);
-		setCanDrag(false);
 		// Если элемент перетащен за границы, прерываем
 		if (!destination) return;
 		// Если элемент остался на том же месте, ничего не делаем
@@ -141,12 +106,7 @@ const Navigation = () => {
 
 	return (
 		<nav className={`${s.box} ${isNotScrollable ? s.noScroll : ''} `} ref={boxRef}>
-			<DragDropContext
-				onDragEnd={onDragEnd}
-				onDragStart={onDragStart}
-				onBeforeCapture={onBeforeCapture}
-				onBeforeDragStart={onBeforeDragStart}
-			>
+			<DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
 				{pinnedTabs?.length > 0 && (
 					<div
 						ref={pinnedTabsRef}
